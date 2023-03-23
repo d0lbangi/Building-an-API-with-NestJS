@@ -1,6 +1,7 @@
 import { MoviesService } from './movies.service';
 import { Movie } from './entities/movie.entity';
 import { Controller, Get, Param, Post, Delete, Patch, Body, Query } from '@nestjs/common';
+import { CreateMovieDto } from './dto/create-movie.dto';
 
 @Controller('movies')
 // 컨트롤러의 이름이 뭐냐고 물었을 때 입력한 이름의 값이 특별하게 취급된다.
@@ -24,30 +25,26 @@ export class MoviesController {
   // }
   // id가 위에서 2번째에 위치하면 다른 get들은 작동하지 않는다.
   @Get(':id')
-  getOne(@Param('id') movieId: string) {
+  getOne(@Param('id') movieId: number): Moive {
     return this.MoviesService.getOne(movieId);
   }
 
   @Post()
   // 아래 Decorator(@Body)는 movieData안의 리퀘스트의 body를 가져오기 위해 쓴 것이다.
-  create(@Body() movieData) {
+  create(@Body() movieData: CreateMovieDto) {
     return this.MoviesService.create(movieData);
   }
 
   @Delete(':id')
-  remove(@Param('id') movieId: string) {
+  remove(@Param('id') movieId: number) {
     return this.MoviesService.deleteOne(movieId);
   }
   // @Put은 모든 리소스를 업데이트 한다.
   // @Patch는 리소스의 일부분만 업데이트 해준다.
   @Patch(':id')
   // 필요한 parameter를 직접 요청하지 않으면, 아무것도 제공되지 않는다. 리소스의 일부분만 업데이트 할 경우
-  patch(@Param('id') movieId: string, @Body() updateData) {
+  patch(@Param('id') movieId: number, @Body() updateData) {
     // 업데이트할 movie의 id랑 우리가 보낼 데이터의 오브젝트를 리턴할 것이다.
-    return {
-      updatedMovie: movieId,
-      ...updateData,
-    };
     return this.MoviesService.update(movieId, updateData);
   }
 }
