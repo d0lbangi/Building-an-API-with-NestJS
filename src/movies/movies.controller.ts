@@ -2,6 +2,7 @@ import { MoviesService } from './movies.service';
 import { Movie } from './entities/movie.entity';
 import { Controller, Get, Param, Post, Delete, Patch, Body, Query } from '@nestjs/common';
 import { CreateMovieDto } from './dto/create-movie.dto';
+import { UpdateMovieDto } from './dto/update-movie.dto';
 
 @Controller('movies')
 // 컨트롤러의 이름이 뭐냐고 물었을 때 입력한 이름의 값이 특별하게 취급된다.
@@ -43,7 +44,7 @@ export class MoviesController {
   // @Patch는 리소스의 일부분만 업데이트 해준다.
   @Patch(':id')
   // 필요한 parameter를 직접 요청하지 않으면, 아무것도 제공되지 않는다. 리소스의 일부분만 업데이트 할 경우
-  patch(@Param('id') movieId: number, @Body() updateData) {
+  patch(@Param('id') movieId: number, @Body() updateData: UpdateMovieDto) {
     // 업데이트할 movie의 id랑 우리가 보낼 데이터의 오브젝트를 리턴할 것이다.
     return this.MoviesService.update(movieId, updateData);
   }
