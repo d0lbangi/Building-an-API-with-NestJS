@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { MoviesService } from './movies.service';
 
 describe('MoviesService', () => {
+  // movies.service를 테스팅하는 파일이다.
   let service: MoviesService;
 
   beforeEach(async () => {
@@ -14,5 +15,9 @@ describe('MoviesService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+
+  it('should be 4', () => {
+    expect(2 + 2).toEqual(4);
   });
 });
