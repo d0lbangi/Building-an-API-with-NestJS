@@ -26,7 +26,7 @@ export class MoviesController {
   // }
   // id가 위에서 2번째에 위치하면 다른 get들은 작동하지 않는다.
   @Get(':id')
-  getOne(@Param('id') movieId: number): Moive {
+  getOne(@Param('id') movieId: number): Movie {
     return this.MoviesService.getOne(movieId);
   }
 
