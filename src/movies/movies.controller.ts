@@ -48,5 +48,6 @@ export class MoviesController {
       updatedMovie: movieId,
       ...updateData,
     };
+    return this.MoviesService.update(movieId, updateData);
   }
 }
